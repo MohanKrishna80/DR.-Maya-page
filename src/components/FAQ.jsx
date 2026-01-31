@@ -1,6 +1,4 @@
-import { useState } from "react";
-import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState } from "react";
 
 const faqs = [
   {
@@ -26,6 +24,7 @@ export default function FAQ() {
 
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
 
+       
         <div className="space-y-4">
           {faqs.map((f, i) => (
             <div
@@ -36,37 +35,32 @@ export default function FAQ() {
               <div className="flex justify-between items-center">
                 <h3>{f.q}</h3>
 
-                <motion.span
-                  animate={{ rotate: open === i ? 45 : 0 }}
-                  className="text-xl"
+              
+                <span
+                  className={`text-xl transform transition-transform duration-300 ${
+                    open === i ? "rotate-45" : ""
+                  }`}
                 >
                   +
-                </motion.span>
+                </span>
               </div>
 
-              <AnimatePresence>
-                {open === i && (
-                  <motion.p
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="mt-3 text-gray-600 overflow-hidden"
-                  >
-                    {f.a}
-                  </motion.p>
-                )}
-              </AnimatePresence>
+         
+              <div
+                className={`overflow-hidden transition-all duration-300 ${
+                  open === i ? "max-h-40 opacity-100 mt-3" : "max-h-0 opacity-0"
+                }`}
+              >
+                <p className="text-gray-600">{f.a}</p>
+              </div>
             </div>
           ))}
         </div>
 
-        <motion.img
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
+        <img
           src="https://media.istockphoto.com/id/2198836359/photo/i-want-to-ask-a-question.webp?a=1&b=1&s=612x612&w=0&k=20&c=OFp426FNlvb42ZuLSJCSZQ6EchcT_nyeGue7LCmCF7s="
           alt="Calm therapy space"
-          className="rounded-xl shadow mx-auto"
+          className="rounded-xl shadow mx-auto transition-transform duration-700 hover:scale-105"
         />
 
       </div>
